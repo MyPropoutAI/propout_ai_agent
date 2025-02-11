@@ -172,7 +172,7 @@ export const wait = (minTime = 1000, maxTime = 3000) => {
 const logFetch = async (url: string, options: any) => {
     elizaLogger.debug(`Fetching ${url}`);
     // Disabled to avoid disclosure of sensitive information such as API keys
-    // elizaLogger.debug(JSON.stringify(options, null, 2));
+    elizaLogger.debug(JSON.stringify(options, null, 2));
     return fetch(url, options);
 };
 
