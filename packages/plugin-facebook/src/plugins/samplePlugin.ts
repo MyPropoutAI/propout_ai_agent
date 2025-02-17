@@ -1,5 +1,5 @@
 import type { Plugin } from "@elizaos/core";
-import { createResourceAction } from "../actions/sampleAction";
+import { createResourceAction } from "../actions/postAction";
 import { sampleProvider } from "../providers/sampleProvider";
 import { sampleEvaluator } from "../evaluators/sampleEvalutor";
 import SampleService from "../services/sampleService";

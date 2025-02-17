@@ -1,39 +1,70 @@
-# Sample Plugin for Eliza
+# @elizaos/plugin-facebook
 
-The Sample Plugin for Eliza extends the functionality of the Eliza platform by providing additional actions, providers, evaluators, and more. This plugin is designed to be easily extendable and customizable to fit various use cases.
+A plugin for Facebook integration, providing automated post capabilities with character-aware content generation.
 
-## Description
+## Overview
 
-The Sample Plugin offers a set of features that can be integrated into the Eliza platform to enhance its capabilities. Below is a high-level overview of the different components available in this plugin.
+This plugin provides functionality to:
 
-## Actions
+- Compose context-aware posts
+- Post content to Facebook
+- Handle authentication and session management
 
-- **createResourceAction**: This action enables the creation and management of generic resources. It can be customized to handle different types of resources and integrate with various data sources.
+## Installation
 
-## Providers
+```bash
+npm install @elizaos/plugin-facebook
+```
 
-- **sampleProvider**: This provider offers a mechanism to supply data or services to the plugin. It can be extended to include additional providers as needed.
+## Configuration
 
-## Evaluators
+The plugin requires the following environment variables:
 
-- **sampleEvaluator**: This evaluator provides a way to assess or analyze data within the plugin. It can be extended to include additional evaluators as needed.
+```env
+FACEBOOK_USERNAME=your_username
+FACEBOOK_PASSWORD=your_password
+FACEBOOK_PAGE_ID=your_page_id
+FACEBOOK_ACCESS_TOKEN=your_access_token
+```
 
-## Services
+## Usage
 
-- **[ServiceName]**: Description of the service and its functionality. This can be extended to include additional services as needed.
+Import and register the plugin in your Eliza configuration:
 
-## Clients
+```typescript
+import { FacebookClientInterface } from "@elizaos/plugin-facebook";
 
-- **[ClientName]**: Description of the client and its functionality. This can be extended to include additional clients as needed.
+export default {
+    plugins: [FacebookClientInterface],
+    // ... other configuration
+};
+```
 
-## How to Extend
+## Development
 
-To extend the Sample Plugin, you can add new actions, providers, evaluators, services, and clients by following the structure provided in the plugin. Each component can be customized to fit your specific requirements.
+### Building
 
-1. **Actions**: Add new actions by defining them in the `actions` array.
-2. **Providers**: Add new providers by defining them in the `providers` array.
-3. **Evaluators**: Add new evaluators by defining them in the `evaluators` array.
-4. **Services**: Add new services by defining them in the `services` array.
-5. **Clients**: Add new clients by defining them in the `clients` array.
+```bash
+npm run build
+```
 
-For more detailed information on how to extend the plugin, refer to the documentation provided in the Eliza platform.
+### Testing
+
+```bash
+npm run test
+```
+
+### Development Mode
+
+```bash
+npm run dev
+```
+
+## Dependencies
+
+- `@elizaos/core`: Core Eliza functionality
+- Other standard dependencies listed in package.json
+
+## License
+
+This plugin is part of the Eliza project. See the main project repository for license information.
