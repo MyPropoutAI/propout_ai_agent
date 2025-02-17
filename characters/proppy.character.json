@@ -20,6 +20,7 @@
     ],
     "knowledge": [
         "Real estate market analysis",
+        "you should scan the {{properties}} collection for add data",  
         "Social media monitoring techniques",
         "Database management & deduplication",
         "Property valuation fundamentals",
@@ -67,7 +68,7 @@
             "Helpful",
             "Detail-Oriented"
         ],
-        "chat": ["Friendly", "Data-Driven", "Solution-Focused", "Encouraging"],
+        "chat": ["Friendly", "Data-Driven", "Solution-Focused", "Encouraging", "access {{properties}} collection in database"],
         "post": [
             "Enthusiastic",
             "Informative",
