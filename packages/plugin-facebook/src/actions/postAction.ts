@@ -4,72 +4,42 @@ import {
     type Memory,
     type HandlerCallback,
     type State,
-    composeContext,
-    generateObject,
-    ModelClass,
     elizaLogger,
 } from "@elizaos/core";
 
-import { CreateResourceSchema, isCreateResourceContent } from "../types";
-
-import { createResourceTemplate } from "../templates";
-
-export const createResourceAction: Action = {
-    name: "CREATE_RESOURCE",
-    description: "Create a new resource with the specified details",
+export const postAction: Action = {
+    name: "POST_FACEBOOK",
+    description: "Post content to Facebook",
+    similes: ["POST", "FACEBOOK_POST", "SEND_FACEBOOK_POST"],
     validate: async (runtime: IAgentRuntime, _message: Memory) => {
-        return !!runtime.character.settings.secrets?.API_KEY;
+        return !!runtime.character.settings.secrets?.FACEBOOK_ACCESS_TOKEN;
     },
     handler: async (
         runtime: IAgentRuntime,
-        _message: Memory,
+        message: Memory,
         state: State,
         _options: object,
         callback: HandlerCallback
     ) => {
         try {
-            const context = composeContext({
-                state,
-                template: createResourceTemplate,
-            });
+            const content = message.content.text;
 
-            const resourceDetails = await generateObject({
-                runtime,
-                context,
-                modelClass: ModelClass.SMALL,
-                schema: CreateResourceSchema,
-            });
+            // Here you would call the Facebook API to post the content
+            // For example:
+            // await runtime.facebookApi.post(content);
 
-            if (!isCreateResourceContent(resourceDetails.object)) {
-                callback({ text: "Invalid resource details provided." }, []);
-                return;
-            }
-
-            // persist relevant data if needed to memory/knowledge
-            // const memory = {
-            //     type: "resource",
-            //     content: resourceDetails.object,
-            //     timestamp: new Date().toISOString()
-            // };
-
-            // await runtime.storeMemory(memory);
+            elizaLogger.info("Posting content to Facebook:", content);
 
             callback(
                 {
-                    text: `Resource created successfully:
-- Name: ${resourceDetails.object.name}
-- Type: ${resourceDetails.object.type}
-- Description: ${resourceDetails.object.description}
-- Tags: ${resourceDetails.object.tags.join(", ")}
-
-Resource has been stored in memory.`,
+                    text: `Content posted successfully to Facebook: ${content}`,
                 },
                 []
             );
         } catch (error) {
-            elizaLogger.error("Error creating resource:", error);
+            elizaLogger.error("Error posting to Facebook:", error);
             callback(
-                { text: "Failed to create resource. Please check the logs." },
+                { text: "Failed to post content to Facebook. Please check the logs." },
                 []
             );
         }
@@ -79,31 +49,13 @@ Resource has been stored in memory.`,
             {
                 user: "{{user1}}",
                 content: {
-                    text: "Create a new resource with the name 'Resource1' and type 'TypeA'",
+                    text: "Post this content to Facebook: 'Hello, world!'",
                 },
             },
             {
                 user: "{{agentName}}",
                 content: {
-                    text: `Resource created successfully:
-- Name: Resource1
-- Type: TypeA`,
-                },
-            },
-        ],
-        [
-            {
-                user: "{{user1}}",
-                content: {
-                    text: "Create a new resource with the name 'Resource2' and type 'TypeB'",
-                },
-            },
-            {
-                user: "{{agentName}}",
-                content: {
-                    text: `Resource created successfully:
-- Name: Resource2
-- Type: TypeB`,
+                    text: "Content posted successfully to Facebook: 'Hello, world!'",
                 },
             },
         ],

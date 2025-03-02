@@ -15,7 +15,7 @@ import { TwitterClientInterface } from "@elizaos/client-twitter";
 import { AlexaClientInterface } from "@elizaos/client-alexa";
 import { MongoDBDatabaseAdapter } from "@elizaos/adapter-mongodb";
 import { DevaClientInterface } from "@elizaos/client-deva";
-
+import { WhatsAppPlugin } from "@elizaos/plugin-whatsapp";
 import { FarcasterClientInterface } from "@elizaos/client-farcaster";
 import { OmniflixPlugin } from "@elizaos/plugin-omniflix";
 import { JeeterClientInterface } from "@elizaos/client-simsai";
@@ -1086,11 +1086,15 @@ export async function createAgent(
                     !getSecret(character, "WALLET_PUBLIC_KEY")?.startsWith(
                         "0x"
                     ))) &&
+                    
             getSecret(character, "SOLANA_ADMIN_PUBLIC_KEY") &&
             getSecret(character, "SOLANA_PRIVATE_KEY") &&
             getSecret(character, "SOLANA_ADMIN_PRIVATE_KEY")
                 ? nftGenerationPlugin
                 : null,
+
+            getSecret(character, "WHATSAPP_ACCESS_TOKEN") ? WhatsAppPlugin : null,
+
             getSecret(character, "ZEROG_PRIVATE_KEY") ? zgPlugin : null,
             getSecret(character, "COINMARKETCAP_API_KEY")
                 ? coinmarketcapPlugin
